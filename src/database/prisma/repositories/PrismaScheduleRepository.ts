@@ -1,4 +1,4 @@
-import prisma from 'src/prisma';
+import { PrismaClient } from '@prisma/client';
 import { Schedule } from 'src/app/entities/schedule';
 import {
   ScheduleRepository,
@@ -11,7 +11,7 @@ import { createDateWithSpecificHour } from 'src/shared/utils/createDate';
 export class PrismaScheduleRepository implements ScheduleRepository {
   constructor(
     @inject('PrismaClient')
-    private prismaClient: typeof prisma
+    private prismaClient: PrismaClient
   ) {}
 
   async findRestaurantScheduleByDayOfWeek(
