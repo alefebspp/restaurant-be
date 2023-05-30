@@ -13,10 +13,26 @@ datasource db {
 model Restaurant {
   id         String   @id
   name       String
-  cnpj       String
+  cnpj       String   @unique
   segment    String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  schedules Schedule[]
+
   @@map("restaurants")
+}
+
+model Schedule {
+  id            String    @id
+  day_of_week   Int       
+  opening_time  DateTime?
+  closing_time  DateTime?
+  restaurant_id String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  restaurant Restaurant @relation(fields: [restaurant_id], references: [id])
+
+  @@map("schedules")
 }
