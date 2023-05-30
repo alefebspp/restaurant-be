@@ -21,6 +21,6 @@
   },
   "packageManager": "yarn@3.5.1",
   "engines": {
-    "node": "lts"
+    "node": "18.x"
   }
 }
