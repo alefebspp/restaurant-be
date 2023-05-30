@@ -3,14 +3,14 @@ import {
   RestaurantRepository,
   UpdateRestaurantRequest
 } from 'src/app/repositories/RestaurantRepository';
-import { PrismaClient } from '@prisma/client';
+import prisma from 'src/prisma';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export class PrismaRestaurantRepository implements RestaurantRepository {
   constructor(
     @inject('PrismaClient')
-    private prismaClient: PrismaClient
+    private prismaClient: typeof prisma
   ) {}
   async index(): Promise<Omit<Restaurant, 'props'>[]> {
     const restaurants = await this.prismaClient.restaurant.findMany();
